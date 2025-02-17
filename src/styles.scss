@@ -1,0 +1,27 @@
+.search-container {
+  width: 100%;
+  max-width: 400px; // Ширина как на изображении
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 16px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #4f46e5; // Цвет текста (индиго)
+  background-color: white;
+  border: none;
+  //border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+
+  &::placeholder {
+    color: #6366f1; // Цвет placeholder-а
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5);
+  }
+}
