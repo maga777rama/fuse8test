@@ -1,7 +1,8 @@
 import { createRoot } from "react-dom/client";
-import { App } from "./App.tsx";
+import { App } from "./pages/main/App.tsx";
 import { BrowserRouter, Route, Routes } from "react-router";
-import { ItemDetailed } from "./itemDetailed.tsx";
+import { ItemDetailed } from "./pages/item/itemDetailed.tsx";
+import "./globalStyles.scss";
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>

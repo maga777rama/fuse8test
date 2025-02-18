@@ -1,6 +1,6 @@
 import { ConfigProvider } from "antd";
 import { Pagination as AntPagination } from "antd";
-import { IData } from "./itemDetailed.tsx";
+import { IData } from "../../item/itemDetailed.tsx";
 
 export interface IPagination {
   data: IData;

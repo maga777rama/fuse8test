@@ -1,9 +1,11 @@
-import "./styles.scss";
-import { useEffect, useState } from "react";
-import { IData } from "./itemDetailed.tsx";
-import { ItemCard } from "./itemCard.tsx";
+import "../../globalStyles.scss";
+import { useEffect, useRef, useState } from "react";
+
+import { ItemCard } from "./components/itemCard.tsx";
 import { useDebounce } from "use-debounce";
-import { Pagination } from "./pagination.tsx";
+import { Pagination } from "./components/pagination.tsx";
+import styles from "./styles.module.scss";
+import { IData } from "../item/itemDetailed.tsx";
 
 export const App = () => {
   console.log("render");
@@ -14,6 +16,14 @@ export const App = () => {
   const [page, setPage] = useState<number>(1);
 
   const [search] = useDebounce(inputValue.length > 3 ? inputValue : "", 800);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   useEffect(() => {
     if (search === "") {
@@ -40,14 +50,22 @@ export const App = () => {
   console.log(data);
 
   return (
-    <div className="search-container">
-      <input
-        type="text"
-        placeholder="Search characters..."
-        className="search-input"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
+    <div className={styles.mainContainer}>
+      <div className={styles.inputWrapper}>
+        <input
+          ref={inputRef}
+          type="text"
+          placeholder="Search characters..."
+          className={styles.searchInput}
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+        {!loading && !error && data && (
+          <p className={styles.numOfCharacters}>
+            Found characters: {data.info.count}
+          </p>
+        )}
+      </div>
 
       {loading && <div>Загрузка...</div>}
       {error && <div>При загрузке данных произошла ошибка</div>}
@@ -57,14 +75,16 @@ export const App = () => {
           {data.error ? (
             <div>Ничего не найдено(</div>
           ) : (
-            <>
-              {data.results.map((item) => (
-                <ItemCard key={item.id} {...item} />
-              ))}
+            <div>
+              <div className={styles.itemsBlock}>
+                {data.results.map((item) => (
+                  <ItemCard key={item.id} {...item} />
+                ))}
+              </div>
               {data.info.pages > 1 && (
                 <Pagination data={data} page={page} setPage={setPage} />
               )}
-            </>
+            </div>
           )}
         </>
       )}
