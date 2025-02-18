@@ -1,7 +1,7 @@
 import { ConfigProvider } from "antd";
 import { Pagination as AntPagination } from "antd";
 import { IData } from "../../item/itemDetailed.tsx";
-
+import styles from "../styles.module.scss";
 export interface IPagination {
   data: IData;
   page: number;
@@ -10,10 +10,7 @@ export interface IPagination {
 
 export const Pagination = ({ data, page, setPage }: IPagination) => {
   return (
-    <nav
-      aria-label="pagination"
-      className={"flex justify-center items-center  h-10 w-full "}
-    >
+    <nav aria-label="pagination" className={styles.pagination}>
       <ConfigProvider
         theme={{
           token: {

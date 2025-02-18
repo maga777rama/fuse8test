@@ -5,6 +5,7 @@
   align-items: center;
 }
 
+// блок и поиском и количеством найденных данных
 .inputWrapper {
   position: relative;
   display: block;
@@ -16,6 +17,7 @@
   line-height: 19.5px;
 }
 
+// непосредственно инпут
 .searchInput {
   max-width: 594px;
   width: calc(100% - 33px);
@@ -43,6 +45,7 @@
   }
 }
 
+// количество найденных персонажей
 .numOfCharacters {
   position: relative;
   justify-self: flex-start;
@@ -50,6 +53,7 @@
   margin: 0;
 }
 
+// див блок со всеми карточками
 .itemsBlock {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -63,6 +67,7 @@
   }
 }
 
+// стили для отдельной карточки персонажа
 .item {
   max-width: 518px;
   width: 100%;
@@ -119,4 +124,12 @@
       color: #aa4b00;
     }
   }
+}
+
+// пагинация
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
 }

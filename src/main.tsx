@@ -5,7 +5,7 @@ import { ItemDetailed } from "./pages/item/itemDetailed.tsx";
 import "./globalStyles.scss";
 
 createRoot(document.getElementById("root")!).render(
-  <BrowserRouter>
+  <BrowserRouter basename={"/fuse8test/"}>
     <Routes>
       <Route path={"/"} element={<App />} />
       <Route path={"/item/:id"} element={<ItemDetailed />} />
