@@ -72,7 +72,10 @@ export const App = () => {
           placeholder="Search characters..."
           className={styles.searchInput}
           value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+            setPage(1);
+          }}
         />
         {!loading && !error && data && (
           <p className={styles.numOfCharacters}>

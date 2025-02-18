@@ -10,18 +10,16 @@ interface ItemProps {
 
 export const ItemCard = ({ id, name, status, created }: ItemProps) => {
   return (
-    <Link to={`/item/${id}`}>
-      <div className={styles.item}>
-        <h1 className={styles.item__name}>{name}</h1>
-        <div className={styles.item__footer}>
-          <p className={styles.item__status}>
-            Status:{" "}
-            <span className={styles[`item__status__${status.toLowerCase()}`]}>
-              {status}
-            </span>
-          </p>
-          <p>Created: {new Date(created).toLocaleDateString("ru-RU")}</p>
-        </div>
+    <Link className={styles.item} to={`/item/${id}`}>
+      <h1 className={styles.item__name}>{name}</h1>
+      <div className={styles.item__footer}>
+        <p className={styles.item__status}>
+          Status:{" "}
+          <span className={styles[`item__status__${status.toLowerCase()}`]}>
+            {status}
+          </span>
+        </p>
+        <p>Created: {new Date(created).toLocaleDateString("ru-RU")}</p>
       </div>
     </Link>
   );

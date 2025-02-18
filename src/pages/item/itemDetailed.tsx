@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import styles from "./styles.module.scss";
-import { useParams } from "react-router"; // Импорт SCSS-модуля
+import { Link, useParams } from "react-router"; // Импорт SCSS-модуля
 
 interface Location {
   name: string;
@@ -103,52 +103,58 @@ export const ItemDetailed = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>{data.name}</h1>
-      <div className={styles.content}>
-        <img
-          src={data.image}
-          alt={`image_${data.name}`}
-          className={styles.image}
-        />
-        <div className={styles.info}>
-          <p>
-            <span className={styles.label}>Статус:</span> {data.status}
-          </p>
-          <p>
-            <span className={styles.label}>Вид:</span> {data.species}
-          </p>
-          {data.type && (
+    <main>
+      <div className={styles.buttonBack}>
+        <Link to={"/"}>Назад</Link>
+      </div>
+      <div className={styles.container}>
+        <h1 className={styles.title}>{data.name}</h1>
+        <div className={styles.content}>
+          <img
+            src={data.image}
+            alt={`image_${data.name}`}
+            className={styles.image}
+          />
+          <div className={styles.info}>
             <p>
-              <span className={styles.label}>Тип:</span> {data.type}
+              <span className={styles.label}>Статус:</span> {data.status}
             </p>
+            <p>
+              <span className={styles.label}>Вид:</span> {data.species}
+            </p>
+            {data.type && (
+              <p>
+                <span className={styles.label}>Тип:</span> {data.type}
+              </p>
+            )}
+            <p>
+              <span className={styles.label}>Пол:</span> {data.gender}
+            </p>
+            <p>
+              <span className={styles.label}>Происхождение:</span>{" "}
+              {data.origin.name}
+            </p>
+            <p>
+              <span className={styles.label}>Локация:</span>{" "}
+              {data.location.name}
+            </p>
+          </div>
+        </div>
+        <div className={styles.episodes}>
+          <h2 className={styles.episodesTitle}>Эпизоды:</h2>
+          {isLoadingEpisodes ? (
+            <p className="text-gray-400">Загрузка эпизодов...</p>
+          ) : episodes && episodes.length > 0 ? (
+            <ul className={styles.episodeList}>
+              {episodes.map((ep, index) => (
+                <li key={index}>{ep.name}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-400">Нет эпизодов</p>
           )}
-          <p>
-            <span className={styles.label}>Пол:</span> {data.gender}
-          </p>
-          <p>
-            <span className={styles.label}>Происхождение:</span>{" "}
-            {data.origin.name}
-          </p>
-          <p>
-            <span className={styles.label}>Локация:</span> {data.location.name}
-          </p>
         </div>
       </div>
-      <div className={styles.episodes}>
-        <h2 className={styles.episodesTitle}>Эпизоды:</h2>
-        {isLoadingEpisodes ? (
-          <p className="text-gray-400">Загрузка эпизодов...</p>
-        ) : episodes && episodes.length > 0 ? (
-          <ul className={styles.episodeList}>
-            {episodes.map((ep, index) => (
-              <li key={index}>{ep.name}</li>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-gray-400">Нет эпизодов</p>
-        )}
-      </div>
-    </div>
+    </main>
   );
 };
